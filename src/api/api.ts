@@ -7,7 +7,8 @@ const defaultConfig: AxiosRequestConfig = {
   headers: {
     "Content-Type": "application/json",
     "accept": "*/*"
-  }
+  },
+  withCredentials: true
 };
 
 // Helper function to get access token from localStorage
@@ -16,7 +17,8 @@ const getAccessToken = () => localStorage.getItem('accessToken');
 // Function to check if we're on auth pages
 const isAuthPage = () => {
   return window.location.pathname.includes('/sign-in') || 
-         window.location.pathname.includes('/sign-up');
+         window.location.pathname.includes('/sign-up') ||
+         window.location.pathname.includes('/forgot-password');
 };
 
 export const api = {
@@ -94,6 +96,23 @@ export const api = {
           window.location.href = '/sign-in';
         }
       }
+      throw error;
+    }
+  },
+
+  options: async (url: string, config: AxiosRequestConfig = {}) => {
+    try {
+      const response = await axios.options(`${BASE_URL}${url}`, {
+        ...defaultConfig,
+        ...config,
+        headers: {
+          ...defaultConfig.headers,
+          ...config.headers
+        }
+      });
+      return response.data;
+    } catch (error) {
+      console.error('OPTIONS request failed:', error);
       throw error;
     }
   }

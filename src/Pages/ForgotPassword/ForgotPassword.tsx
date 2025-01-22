@@ -1,51 +1,60 @@
-import forgotPasswordImage from "./Assets/forgot-pass-img.webp";
+import { useState } from "react";
+import forgotPasswordImage from "./Assets/newspapers.webp";
 import logo from "../../Assets/Images/logo.svg";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { ForgotPasswordForm } from "../../Components/ForgotPasswordForm/ForgotPasswordForm";
-import { useState } from "react";
 import { Icons } from "../../Components/Icons/Icons";
 import { Button } from "../../Components/Button/Button";
-import { Link } from "react-router-dom";
+import { authApi } from "../../api/auth";
+import { useAlert } from "../../contexts/AlertContext";
 
 export const ForgotPassword = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const { width } = useWindowDimensions();
+  const { showAlert } = useAlert();
 
-  const handleSubmit = (values: { email: string; }) => {
-    console.log(values);
-    // TODO: Handle form submission here
-    setIsSuccess(true);
+  const handleSubmit = async (values: { email: string }) => {
+    try {
+      await authApi.resetPassword(values);
+      setIsSuccess(true);
+      showAlert("Password reset instructions have been sent to your email", "success");
+    } catch (error: any) {
+      showAlert(
+        error.response?.data?.message || "Failed to send reset instructions. Please try again.", 
+        "error"
+      );
+    }
   };
-
+ 
   return (
     <main className="forgot-password">
       {width > 768 && (
         <img src={forgotPasswordImage} alt="abstract background" className="bg-image" />
       )}
       <section className="content">
+        <div className="logo-container">
+          <img src={logo} alt="logo" className="logo" />
+          <div className="logo-text">lookthis</div>
+        </div>
 
         {isSuccess ? (
           <>
-            {Icons.Success}
-            <h1>Password reset</h1>
+            <div className="success-icon">{Icons.Success}</div>
+            <h1>Check your email</h1>
             <p>
-              Your password has been successfully reset. Click below
-              to sign in.
+              We have sent password reset instructions to your email.
+              Please check your inbox.
             </p>
             <Button variant="link" to="/sign-in">
-              Go to Sign in
+              Back to Sign in
             </Button>
           </>
         ) : (
           <>
-            <img src={logo} alt="logo" className="logo" />
-            <h1>Forgot Your Password?</h1>
-            <p>Enter your email address, and we’ll send you instructions to reset your password.</p>
+            <h1>Forgot Password?</h1>
+            <p>Enter your email address, and we'll send you instructions to reset your password.</p>
 
             <ForgotPasswordForm onSubmit={handleSubmit} />
-            <Link className="back-to" to="/sign-in">
-              Back to Sign in
-            </Link>
           </>
         )}
       </section>

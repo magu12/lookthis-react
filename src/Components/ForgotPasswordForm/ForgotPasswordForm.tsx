@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
+import { Link } from "react-router-dom";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -10,7 +11,7 @@ const validationSchema = Yup.object({
 });
 
 interface ForgotPasswordFormProps {
-  onSubmit: (values: { email: string; }) => void;
+  onSubmit: (values: { email: string }) => void;
 }
 
 export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
@@ -19,7 +20,13 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
       email: "",
     },
     validationSchema,
-    onSubmit,
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        await onSubmit(values);
+      } finally {
+        setSubmitting(false);
+      }
+    },
   });
 
   return (
@@ -33,12 +40,20 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
-        error={formik.errors.email}
+        error={formik.touched.email ? formik.errors.email : undefined}
         touched={formik.touched.email}
       />
-      <Button type="submit">
-        Submit
+
+      <Button
+        type="submit"
+        disabled={formik.isSubmitting}
+      >
+        {formik.isSubmitting ? "Sending..." : "Reset Password"}
       </Button>
+
+      <Link className="back-to" to="/sign-in">
+        Back to Sign in
+      </Link>
     </form>
   );
 };

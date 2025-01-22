@@ -1,0 +1,80 @@
+@import "../../Assets/Styles/colors";
+@import "../../Assets/Styles/mixins/mobile";
+
+.not-found {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 24.2188vw;
+    text-align: center;
+
+    .logo {
+      width: 5.2083vw;
+      height: auto;
+      margin-bottom: .8333vw;
+    }
+
+    .logo-text {
+      font-size: 2vw;
+      font-weight: 700;
+      color: $wooden-floor;
+      margin-bottom: 1.5vw;
+      letter-spacing: 0.1vw;
+    }
+
+    h1 {
+      font-size: 5vw;
+      font-weight: 700;
+      color: $wooden-floor;
+      margin-bottom: .8333vw;
+    }
+
+    p {
+      margin-bottom: 1.6667vw;
+    }
+
+    .btn {
+      width: auto;
+      padding: .625vw 2vw;
+    }
+  }
+
+  @include _768 {
+    padding: 0 24px;
+    text-align: center;
+
+    .content {
+      max-width: 100%;
+
+      .logo {
+        width: 100px;
+        margin-bottom: 16px;
+      }
+
+      .logo-text {
+        font-size: 24px;
+        margin-bottom: 24px;
+      }
+
+      h1 {
+        font-size: 64px;
+        margin-bottom: 16px;
+      }
+
+      p {
+        margin-bottom: 32px;
+      }
+
+      .btn {
+        padding: 12px 32px;
+      }
+    }
+  }
+} 
