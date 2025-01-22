@@ -1,0 +1,22 @@
+@import '../../Assets/Styles/colors';
+
+.dashboard {
+  padding: 2.5vw 0;
+
+  .tabs {
+    margin-bottom: 2.5vw;
+
+    .MuiTabs-indicator {
+     background-color: $wooden-floor;
+    }
+  }
+
+  .tab {
+    color: $wooden-floor;
+    font-size: .8333vw;
+
+    &.Mui-selected {
+      color: $wooden-floor;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+@import "./Assets/Fonts/Poppins/style.css";
+@import "./Assets/Styles/mixins/mobile";
+@import "./Assets/Styles/colors";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.wrap {
+  width: 100%;
+  padding: 0 1.25vw;
+  max-width: 66.6667vw;
+  margin: 0 auto;
+}
+
+h1 {
+  color: $dark-text;
+  font-size: 1.6667vw;
+  font-weight: 600;
+  line-height: 150%;
+  margin: 0;
+
+  @include _768 {
+    font-size: 24px;
+  }
+}
+
+p {
+  color: $dark-purple;
+  font-size: .8333vw;
+  font-weight: 400;
+  line-height: 150%;
+  margin: 0;
+
+  @include _768 {
+    font-size: 16px;
+  }
+}
+
+a {
+  color: $wooden-floor;
+  font-size: .7292vw;
+  font-weight: 500;
+  line-height: 130%;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @include _768 {
+    font-size: 14px;
+  }
+}
+
+@import "./Assets/Styles/blocks/form";
+
+@import "./Assets/Styles/pages/auth";

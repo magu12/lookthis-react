@@ -1,0 +1,93 @@
+@import "../../Assets/Styles/colors";
+
+.header {
+  padding: .8333vw 0;
+  position: relative;
+
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .text-logo {
+    font-size: 1.6667vw;
+    font-weight: 600;
+    line-height: 150%;
+    text-decoration: none;
+    color: $wooden-floor;
+  }
+
+  .logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4.5vw;
+    height: max-content;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+    gap: .8333vw;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    gap: .8333vw;
+
+    img {
+      width: 2.2vw;
+      height: 2.2vw;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    span {
+      font-size: .8333vw;
+      font-weight: 600;
+      line-height: 150%;
+      color: $dark-text;
+    }
+  }
+
+  .menu-icon {
+    position: relative;
+    width: 1.25vw;
+    height: 1.25vw;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(0deg);
+      transition: all 0.45s ease;
+      opacity: 0;
+
+      &:nth-child(1) {
+        opacity: 1;
+      }
+    }
+
+    &.active {
+      svg {
+        transform: translate(-50%, -50%) rotate(360deg);
+        opacity: 1;
+
+        &:nth-child(1) {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

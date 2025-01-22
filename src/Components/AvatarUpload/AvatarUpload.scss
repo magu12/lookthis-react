@@ -1,0 +1,19 @@
+.avatar-upload-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .3125vw;
+
+  .avatar-upload {
+    width: 5.2083vw;
+    height: 5.2083vw;
+    border-radius: 50%;
+
+    .MuiBox-root {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 0;
+    }
+  }
+}
