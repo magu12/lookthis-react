@@ -24,18 +24,18 @@ export const Posts = () => {
       <div className="wrap">
         <Grid container spacing={4}>
           {posts.map((post) => (
-            <Grid item key={post.id} xs={12} sm={6} md={3}>
-              <Link to={`/posts/${post.id}`}>
+            <Grid item key={post.id} xs={12} sm={6} md={3} className="card">
+              <Link to={`/post/${post.id}`}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardMedia
                   component="img"
                   height="140"
-                  image={post.avatar_url}
+                  image={post.featured_image_url}
                   alt={post.title}
                   sx={{ objectFit: 'cover' }}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h6" component="h2" noWrap>
+                  <Typography gutterBottom variant="h6" component="h2">
                     {post.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{

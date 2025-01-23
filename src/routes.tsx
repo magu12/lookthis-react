@@ -6,7 +6,8 @@ import { ProtectedRoute } from './Components/ProtectedRoute/ProtectedRoute';
 import { Dashboard } from './Pages/Dashboard/Dashboard';
 import { Settings } from './Pages/Settings/Settings';
 import { NotFound } from './Pages/NotFound/NotFound';
-import CreateArticle from './Pages/CreateArticle/CreateArticle';
+import ArticlePage from './Pages/ArticlePage/ArticlePage';
+import { Post } from './Pages/Post/Post';
 
 export const AppRoutes = () => {
   return (
@@ -26,7 +27,16 @@ export const AppRoutes = () => {
         path="/create-article" 
         element={
           <ProtectedRoute>
-            <CreateArticle />
+            <ArticlePage />
+          </ProtectedRoute>
+        } 
+      />
+      <Route path="/post/:id" element={<Post />} />
+      <Route 
+        path="/edit-post/:id" 
+        element={
+          <ProtectedRoute>
+            <ArticlePage />
           </ProtectedRoute>
         } 
       />

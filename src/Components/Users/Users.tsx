@@ -24,7 +24,7 @@ export const Users = () => {
       <div className="wrap">
         <Grid container spacing={4}>
           {users.map((user) => (
-            <Grid item key={user.id} xs={12} sm={6} md={3}>
+            <Grid item key={user.id} xs={12} sm={6} md={3}  className="card">
               <Link to={`/users/${user.id}`}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardMedia

@@ -10,6 +10,13 @@ export interface Post {
   views: number;
   username: string;
   avatar_url: string;
+  featured_image_url: string;
+}
+
+export interface UploadResponse {
+  url: string;
+  originalName: string;
+  timeElapsed: number;
 }
 
 export const postsApi = {
@@ -25,7 +32,7 @@ export const postsApi = {
     return api.get(`/posts/user/${userId}`);
   },
 
-  uploadContentImage: async (image: File): Promise<string> => {
+  uploadContentImage: async (image: File): Promise<UploadResponse> => {
     const formData = new FormData();
     formData.append('content_image', image);
 
@@ -52,6 +59,36 @@ export const postsApi = {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
+    });
+  },
+
+  updatePost: async (
+    id: number,
+    title: string,
+    shortDescription: string,
+    content: string,
+    featuredImage?: File
+  ): Promise<void> => {
+    let featuredImageUrl;
+    
+    // If there's a new image, upload it first
+    if (featuredImage) {
+      const formData = new FormData();
+      formData.append('featured_image', featuredImage);
+      const imageResponse = await api.post('/posts/upload-featured-image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      featuredImageUrl = imageResponse.url;
+    }
+
+    // Then update the post with all the data
+    return api.put(`/posts/${id}`, {
+      title,
+      short_description: shortDescription,
+      content,
+      ...(featuredImageUrl && { featured_image_url: featuredImageUrl })
     });
   }
 };
