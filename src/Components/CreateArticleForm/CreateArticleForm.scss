@@ -1,0 +1,156 @@
+@import "../../Assets/Styles/colors";
+@import "../../Assets/Styles/mixins/mobile";
+
+.create-article {
+  padding: 3.25vw 0;
+
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.create-article-form {
+  width: 100%;
+  max-width: 31.25vw;
+  display: flex;
+  flex-direction: column;
+  gap: .3125vw;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: .3125vw;
+    margin-bottom: 1rem;
+
+    label {
+      color: $dark-text;
+      font-size: .7292vw;
+      font-weight: 400;
+      line-height: 130%;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      background-color: $white;
+      color: $dark-text;
+      font-size: .7292vw;
+      font-weight: 400;
+      line-height: 130%;
+      border-radius: 8px;
+      border: 1px solid $aged-paper-light;
+      padding: .625vw .7292vw;
+      outline: none;
+      transition: all 0.3s ease;
+
+      &:focus {
+        box-shadow: 0px 0px 0px 4px rgba($aged-paper-light, .5);
+        border-color: $wooden-floor;
+      }
+    }
+
+    .image-preview {
+      margin-top: .3125vw;
+      
+      img {
+        width: 100%;
+        max-height: 300px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+    }
+
+    .editor-wrapper {
+      .quill {
+        .ql-toolbar {
+          border-color: $aged-paper-light;
+          border-radius: 8px 8px 0 0;
+          background: $white;
+
+          .ql-formats {
+            margin-right: 10px;
+
+            button {
+              width: 28px;
+              height: 24px;
+              padding: 3px 5px;
+              
+              &:hover {
+                color: $wooden-floor;
+              }
+
+              &.ql-active {
+                color: $wooden-floor;
+              }
+            }
+
+            .ql-picker {
+              &:hover .ql-picker-label {
+                color: $wooden-floor;
+              }
+
+              &.ql-expanded .ql-picker-label {
+                color: $wooden-floor;
+              }
+            }
+          }
+        }
+
+        .ql-container {
+          height: 300px;
+          font-size: .7292vw;
+          border-color: $aged-paper-light;
+          border-radius: 0 0 8px 8px;
+          background: $white;
+
+          .ql-editor {
+            color: $dark-text;
+
+            &.ql-blank::before {
+              color: rgba($dark-text, 0.6);
+              font-style: normal;
+            }
+          }
+        }
+
+        &:focus-within {
+          .ql-toolbar {
+            border-color: $wooden-floor;
+          }
+
+          .ql-container {
+            border-color: $wooden-floor;
+          }
+        }
+      }
+    }
+  }
+
+  @include _768 {
+    gap: 6px;
+    max-width: 100%;
+    padding: 0 16px;
+
+    .form-group {
+      gap: 6px;
+
+      label {
+        font-size: 14px;
+      }
+
+      input[type="file"] {
+        padding: 16px 14px;
+        font-size: 14px;
+      }
+
+      .editor-wrapper {
+        .quill {
+          .ql-container {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+} 

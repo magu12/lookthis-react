@@ -6,6 +6,7 @@ import { ProtectedRoute } from './Components/ProtectedRoute/ProtectedRoute';
 import { Dashboard } from './Pages/Dashboard/Dashboard';
 import { Settings } from './Pages/Settings/Settings';
 import { NotFound } from './Pages/NotFound/NotFound';
+import CreateArticle from './Pages/CreateArticle/CreateArticle';
 
 export const AppRoutes = () => {
   return (
@@ -18,6 +19,14 @@ export const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/create-article" 
+        element={
+          <ProtectedRoute>
+            <CreateArticle />
           </ProtectedRoute>
         } 
       />

@@ -50,6 +50,9 @@ export const Header = () => {
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
           >
+            <MenuItem component={Link} to="/create-article" onClick={handleMenuClose}>
+              Add new article
+            </MenuItem>
             <MenuItem component={Link} to="/settings" onClick={handleMenuClose}>
               Settings
             </MenuItem>
